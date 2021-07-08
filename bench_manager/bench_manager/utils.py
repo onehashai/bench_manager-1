@@ -14,7 +14,7 @@ def run_command(commands, doctype, key, cwd='..', docname=' ', after_command=Non
 	console_dump = ""
 	logged_command = " && ".join(commands)
 	logged_command += " " #to make sure passwords at the end of the commands are also hidden
-	sensitive_data = ["--mariadb-root-password", "--admin-password", "--root-password"]
+	sensitive_data = ["--mariadb-root-password", "--admin-password", "--root-password", "set-admin-password"]
 	for password in sensitive_data:
 		logged_command = re.sub("{password} .*? ".format(password=password), '', logged_command, flags=re.DOTALL)
 	doc = frappe.get_doc({'doctype': 'Bench Manager Command', 'key': key, 'source': doctype+': '+docname,
